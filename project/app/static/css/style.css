@@ -1,0 +1,172 @@
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* BODY */
+body {
+    background-color: #f3f2ef;
+}
+
+/* NAVBAR */
+nav {
+    background-color: #0a66c2;
+    padding: 12px 40px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-right: 20px;
+    font-weight: bold;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+/* CONTAINER */
+.container {
+    width: 60%;
+    margin: 30px auto;
+}
+
+/* CARD */
+.card {
+    background-color: white;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* FORM */
+form textarea,
+form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+form button {
+    background-color: #0a66c2;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #004182;
+}
+
+/* HEADINGS */
+h2 {
+    margin-bottom: 15px;
+}
+
+/* POST USER */
+.post-user {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+/* SMALL TEXT */
+small {
+    color: gray;
+}
+
+body {
+    background: #f3f2ef;
+    font-family: Arial, sans-serif;
+    margin: 0;
+}
+
+/* Navbar */
+.navbar {
+    background: white;
+    padding: 12px 30px;
+    display: flex;
+    gap: 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: #0a66c2;
+    font-weight: bold;
+}
+
+/* Feed layout */
+.feed-container {
+    display: flex;
+    gap: 20px;
+    padding: 25px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* Sidebars */
+.sidebar {
+    width: 22%;
+}
+
+/* Main Feed */
+.main-feed {
+    width: 56%;
+}
+
+/* Cards */
+.card {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+/* Profile mini */
+.profile-mini {
+    text-align: center;
+}
+
+.profile-pic {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+/* Create post */
+.create-post textarea {
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    resize: none;
+}
+
+.create-post button {
+    margin-top: 10px;
+    background: #0a66c2;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+/* Post */
+.post h4 {
+    margin: 0;
+}
+
+.post small {
+    color: gray;
+}

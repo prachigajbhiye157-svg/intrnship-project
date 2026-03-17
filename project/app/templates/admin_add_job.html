@@ -1,0 +1,155 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<style>
+
+.page-title{
+font-weight:700;
+}
+
+.job-card{
+border-radius:16px;
+}
+
+.form-control{
+border-radius:10px;
+}
+
+</style>
+
+<div class="container mt-4">
+
+<!-- HEADER -->
+<div class="d-flex justify-content-between align-items-center mb-4">
+
+<div>
+<h2 class="page-title mb-0">
+💼 Post New Job
+</h2>
+<p class="text-muted mb-0">
+Create a new job opportunity for users
+</p>
+</div>
+
+<a href="{% url 'admin_jobs' %}"
+class="btn btn-outline-secondary rounded-pill">
+
+← Back to Jobs
+
+</a>
+
+</div>
+
+
+<div class="row justify-content-center">
+
+<div class="col-lg-7">
+
+<div class="card shadow-sm border-0 job-card">
+
+<div class="card-body p-4">
+
+<form method="POST">
+
+{% csrf_token %}
+
+<!-- TITLE -->
+
+<div class="mb-3">
+
+<label class="form-label fw-semibold">
+Job Title
+</label>
+
+<input type="text"
+name="title"
+class="form-control"
+placeholder="Enter job title"
+required>
+
+</div>
+
+
+<!-- COMPANY -->
+
+<div class="mb-3">
+
+<label class="form-label fw-semibold">
+Company Name
+</label>
+
+<input type="text"
+name="company"
+class="form-control"
+placeholder="Enter company name"
+required>
+
+</div>
+
+
+<!-- LOCATION -->
+
+<div class="mb-3">
+
+<label class="form-label fw-semibold">
+Location
+</label>
+
+<input type="text"
+name="location"
+class="form-control"
+placeholder="Remote / City"
+required>
+
+</div>
+
+
+<!-- DESCRIPTION -->
+
+<div class="mb-4">
+
+<label class="form-label fw-semibold">
+Job Description
+</label>
+
+<textarea name="description"
+rows="4"
+class="form-control"
+placeholder="Enter job description"></textarea>
+
+</div>
+
+
+<!-- BUTTON -->
+
+<div class="d-flex gap-2">
+
+<button type="submit"
+class="btn btn-primary rounded-pill px-4">
+
+Post Job
+
+</button>
+
+<a href="{% url 'admin_jobs' %}"
+class="btn btn-outline-secondary rounded-pill px-4">
+
+Cancel
+
+</a>
+
+</div>
+
+</form>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+{% endblock %}

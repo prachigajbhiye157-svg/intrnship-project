@@ -1,0 +1,219 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<title>LinkedIn Clone</title>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- BOOTSTRAP -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- BOOTSTRAP ICONS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+<!-- Custom CSS -->
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+<style>
+
+body{
+background:#f3f2ef;
+font-family:Segoe UI;
+}
+
+/* NAVBAR */
+.navbar{
+height:65px;
+}
+
+.navbar-brand{
+font-weight:700;
+font-size:26px;
+color:#0a66c2 !important;
+}
+
+/* SEARCH BAR */
+.search-box{
+background:#eef3f8;
+border-radius:8px;
+padding:6px 10px;
+width:260px;
+border:none;
+}
+
+.search-box:focus{
+outline:none;
+}
+
+/* NAV ICONS */
+
+.nav-icon{
+display:flex;
+flex-direction:column;
+align-items:center;
+font-size:13px;
+color:#555;
+margin:0 10px;
+text-decoration:none;
+}
+
+.nav-icon i{
+font-size:20px;
+}
+
+.nav-icon:hover{
+color:#0a66c2;
+}
+
+/* PROFILE IMAGE */
+
+.profile-img{
+width:28px;
+height:28px;
+border-radius:50%;
+object-fit:cover;
+}
+
+.nav-profile-img{
+    width:32px;
+    height:32px;
+    border-radius:50%;
+    object-fit:cover;
+    border:1px solid #add;
+}
+
+/* PAGE */
+.page-wrapper{
+min-height:calc(100vh - 70px);
+}
+
+.sidebar-profile-img{
+    width:90px;
+    height:90px;
+    border-radius:50%;
+    object-fit:cover;
+}
+
+</style>
+</head>
+
+<body>
+
+{% if user.is_authenticated %}
+
+<nav class="navbar navbar-expand-lg bg-white shadow-sm sticky-top">
+
+<div class="container">
+
+<!-- LOGO -->
+<a class="navbar-brand" href="{% url 'feed' %}">
+Linked<span style="color:black;">in</span>
+</a>
+
+<!-- SEARCH -->
+<input class="search-box ms-3" placeholder="Search">
+
+<!-- MENU -->
+<div class="ms-auto d-flex align-items-center">
+
+<a href="{% url 'feed' %}" class="nav-icon">
+<i class="bi bi-house-door-fill"></i>
+Home
+</a>
+
+<a href="{% url 'jobs' %}" class="nav-icon">
+<i class="bi bi-briefcase-fill"></i>
+Jobs
+</a>
+
+<a href="{% url 'profile' %}" class="nav-icon">
+<i class="bi bi-person-circle"></i>
+Profile
+</a>
+
+{% if user.is_staff %}
+<a href="{% url 'admin_dashboard' %}" class="nav-icon">
+<i class="bi bi-speedometer2"></i>
+Admin
+</a>
+{% endif %}
+
+<!-- PROFILE DROPDOWN -->
+
+<div class="dropdown ms-3">
+
+<a class="d-flex align-items-center text-decoration-none dropdown-toggle"
+href="#"
+data-bs-toggle="dropdown">
+
+{% if user.profile.profile_image %}
+<img src="{{ user.profile.profile_image.url }}" class="nav-profile-img me-2">
+{% else %}
+<img src="{% static 'images/default.png' %}" class="nav-profile-img me-2">
+{% endif %}
+
+<span class="fw-semibold">
+{{ user.username }}
+</span>
+
+</a>
+
+
+<ul class="dropdown-menu dropdown-menu-end shadow">
+
+<li>
+<a class="dropdown-item" href="{% url 'profile' %}">
+👤 View Profile
+</a>
+</li>
+
+<li>
+<a class="dropdown-item" href="{% url 'edit_profile' %}">
+✏ Edit Profile
+</a>
+</li>
+
+{% if user.is_staff %}
+<li>
+<a class="dropdown-item" href="{% url 'admin_users' %}">
+👥 Manage Users
+</a>
+</li>
+{% endif %}
+
+<li><hr class="dropdown-divider"></li>
+
+<li>
+<a class="dropdown-item text-danger" href="{% url 'logout' %}">
+Logout
+</a>
+</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+</nav>
+
+{% endif %}
+
+<!-- PAGE CONTENT -->
+
+<div class="container page-wrapper mt-4">
+
+{% block content %}
+{% endblock %}
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

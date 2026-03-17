@@ -1,0 +1,133 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- OPTIONAL: Bootstrap (agar base.html me already hai to duplicate harmless hai) -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+    body {
+        background: linear-gradient(135deg, #eef3f8, #f8f9fa);
+    }
+
+    .login-card {
+        border-radius: 18px;
+        background: #ffffff;
+        animation: fadeIn 0.6s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(15px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .login-logo {
+        font-size: 28px;
+        font-weight: 800;
+        letter-spacing: 0.5px;
+    }
+
+    .login-logo span {
+        color: #0a66c2;
+    }
+
+    .form-control {
+        padding: 10px 14px;
+        border-radius: 10px;
+    }
+
+    .form-control:focus {
+        box-shadow: 0 0 0 0.15rem rgba(10,102,194,.25);
+        border-color: #0a66c2;
+    }
+
+    .btn-primary {
+        background-color: #0a66c2;
+        border: none;
+        border-radius: 25px;
+        font-weight: 600;
+        padding: 10px;
+    }
+
+    .btn-primary:hover {
+        background-color: #004182;
+    }
+
+    .eye-icon {
+        position:absolute;
+        right:14px;
+        top:50%;
+        transform:translateY(-50%);
+        cursor:pointer;
+        opacity:0.7;
+    }
+
+    .eye-icon:hover {
+        opacity:1;
+    }
+</style>
+
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 90vh;">
+
+    <div class="card login-card shadow-lg p-4" style="width: 100%; max-width: 400px;">
+
+        <!-- Logo -->
+        <div class="text-center mb-2">
+            <div class="login-logo">
+                Linked<span>In</span>
+            </div>
+        </div>
+
+        <p class="text-center text-muted mb-4">
+            Welcome back
+        </p>
+
+        <!-- Login Form -->
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <input type="text"
+                       name="username"
+                       class="form-control"
+                       placeholder="Username"
+                       required>
+            </div>
+
+            <div class="mb-3 position-relative">
+                <input type="password"
+                       name="password"
+                       id="loginPass"
+                       class="form-control"
+                       placeholder="Password"
+                       required>
+
+                <span onclick="togglePassword('loginPass')" class="eye-icon">
+                    👁
+                </span>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">
+                Login
+            </button>
+        </form>
+
+        <p class="text-center mt-3 mb-0">
+            New to LinkedIn?
+            <a href="{% url 'signup' %}" class="fw-semibold text-decoration-none">
+                Create account
+            </a>
+        </p>
+
+    </div>
+</div>
+
+<script>
+function togglePassword(id) {
+    let pass = document.getElementById(id);
+    pass.type = pass.type === "password" ? "text" : "password";
+}
+</script>
+
+{% endblock %}

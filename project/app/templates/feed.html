@@ -1,0 +1,202 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+
+.sidebar-profile-img{
+width:90px;
+height:90px;
+border-radius:50%;
+object-fit:cover;
+}
+
+.post-profile-img{
+width:45px;
+height:45px;
+border-radius:50%;
+object-fit:cover;
+}
+
+.post-input{
+border-radius:30px;
+padding:10px 15px;
+}
+
+.action-text span{
+cursor:pointer;
+}
+
+.action-text span:hover{
+color:#0a66c2;
+}
+
+</style>
+
+<div class="row justify-content-center">
+
+<!-- LEFT SIDEBAR -->
+<div class="col-lg-3 d-none d-lg-block">
+
+<div class="card shadow-sm border-0 rounded-4 text-center p-3">
+
+{% if user.profile.profile_image %}
+<img src="{{ user.profile.profile_image.url }}"
+class="sidebar-profile-img mx-auto mb-2">
+{% else %}
+<img src="{% static 'images/default.png' %}"
+class="sidebar-profile-img mx-auto mb-2">
+{% endif %}
+
+<h5 class="fw-bold mb-0">{{ user.username }}</h5>
+<p class="text-muted small">{{ user.email }}</p>
+
+<hr>
+
+<p class="small text-muted mb-1">Profile Views</p>
+<p class="fw-semibold text-primary">128</p>
+
+</div>
+
+</div>
+
+
+<!-- MAIN FEED -->
+<div class="col-lg-6">
+
+<!-- CREATE POST -->
+<div class="card shadow-sm border-0 rounded-4 mb-3">
+
+<div class="card-body">
+
+<form method="POST">
+{% csrf_token %}
+
+<div class="d-flex gap-2 mb-3">
+
+{% if user.profile.profile_image %}
+<img src="{{ user.profile.profile_image.url }}"
+class="post-profile-img">
+{% else %}
+<img src="{% static 'images/default.png' %}"
+class="post-profile-img">
+{% endif %}
+
+<textarea name="content"
+class="form-control post-input"
+rows="2"
+placeholder="Start a post..."
+required></textarea>
+
+</div>
+
+<div class="d-flex justify-content-between align-items-center">
+
+<div class="d-flex gap-3 text-muted small">
+
+<span>📷 Photo</span>
+<span>🎥 Video</span>
+<span>📄 Article</span>
+
+</div>
+
+<button class="btn btn-primary rounded-pill px-4">
+Post
+</button>
+
+</div>
+
+</form>
+
+</div>
+
+</div>
+
+
+<!-- POSTS -->
+{% for post in posts %}
+
+<div class="card shadow-sm border-0 rounded-4 mb-3">
+
+<div class="card-body">
+
+<!-- HEADER -->
+<div class="d-flex align-items-center gap-3 mb-2">
+
+{% if post.user.profile.profile_image %}
+<img src="{{ post.user.profile.profile_image.url }}"
+class="post-profile-img">
+{% else %}
+<img src="{% static 'images/default.png' %}"
+class="post-profile-img">
+{% endif %}
+
+<div>
+<h6 class="fw-bold mb-0">{{post.user.username}}</h6>
+<small class="text-muted">{{post.created_at}}</small>
+</div>
+
+</div>
+
+<!-- CONTENT -->
+<p class="mb-3">{{post.content}}</p>
+
+<hr>
+
+<!-- ACTIONS -->
+<div class="d-flex justify-content-around text-muted fw-semibold action-text">
+
+<span>👍 Like</span>
+<span>💬 Comment</span>
+<span>🔁 Share</span>
+
+</div>
+
+</div>
+
+</div>
+
+{% empty %}
+
+<div class="card shadow-sm border-0 rounded-4 p-4 text-center">
+<p class="text-muted mb-0">
+No posts yet. Be the first to post 🚀
+</p>
+</div>
+
+{% endfor %}
+
+</div>
+
+
+<!-- RIGHT SIDEBAR -->
+<div class="col-lg-3 d-none d-lg-block">
+
+<div class="card shadow-sm border-0 rounded-4 p-3">
+
+<h6 class="fw-bold">Add to your feed</h6>
+
+<div class="d-flex gap-2 align-items-center mt-3">
+
+<img src="{% static 'images/default.png' %}"
+class="rounded-circle"
+width="35" height="35">
+
+<div>
+<p class="mb-0 fw-semibold">Web Developers</p>
+<small class="text-muted">Technology</small>
+</div>
+
+</div>
+
+<button class="btn btn-outline-primary btn-sm rounded-pill mt-3 w-100">
+Follow
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+{% endblock %}

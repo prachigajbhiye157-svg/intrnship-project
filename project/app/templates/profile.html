@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<style>
+
+/* COVER */
+.profile-cover{
+height:160px;
+background:linear-gradient(135deg,#0a66c2,#004182);
+border-radius:14px 14px 0 0;
+}
+
+/* PROFILE IMAGE */
+.profile-avatar{
+width:90px;
+height:90px;
+border-radius:50%;
+background:#fff;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:34px;
+font-weight:700;
+color:#0a66c2;
+margin-top:-45px;
+border:4px solid white;
+box-shadow:0 4px 15px rgba(0,0,0,.1);
+}
+
+/* POST CARD */
+.post-card{
+border-radius:14px;
+transition:.2s;
+}
+
+.post-card:hover{
+transform:translateY(-3px);
+box-shadow:0 8px 25px rgba(0,0,0,.08);
+}
+
+.section-title{
+font-weight:700;
+border-left:4px solid #0a66c2;
+padding-left:10px;
+}
+
+</style>
+
+<div class="container mt-4">
+
+<div class="row justify-content-center">
+
+<div class="col-lg-9">
+
+<!-- PROFILE CARD -->
+<div class="card shadow-sm border-0 mb-4">
+
+<div class="profile-cover"></div>
+
+<div class="card-body text-center">
+
+<div class="profile-avatar mx-auto">
+{{ user.username|slice:":1"|upper }}
+</div>
+
+<h4 class="fw-bold mt-2 mb-0">
+{{ user.username }}
+</h4>
+
+<p class="text-muted mb-3">
+{{ user.email }}
+</p>
+
+<a href="{% url 'edit_profile' %}"
+class="btn btn-outline-primary btn-sm rounded-pill px-4">
+Edit Profile
+</a>
+
+</div>
+
+</div>
+
+
+<!-- ABOUT -->
+<div class="card shadow-sm border-0 mb-4">
+
+<div class="card-body">
+
+<h5 class="section-title mb-3">
+About
+</h5>
+
+<p class="mb-2">
+<strong>📍 Location:</strong>
+{{ profile.location|default:"Not added" }}
+</p>
+
+<p class="mb-0">
+<strong>📝 Bio:</strong>
+{{ profile.bio|default:"No bio added" }}
+</p>
+
+</div>
+
+</div>
+
+
+<!-- POSTS -->
+<h5 class="section-title mb-3">
+My Posts
+</h5>
+
+{% for post in posts %}
+
+<div class="card shadow-sm border-0 post-card mb-3">
+
+<div class="card-body">
+
+<p class="mb-2">
+{{ post.content }}
+</p>
+
+<small class="text-muted">
+{{ post.created_at|date:"d M Y, h:i A" }}
+</small>
+
+</div>
+
+</div>
+
+{% empty %}
+
+<div class="alert alert-secondary text-center">
+No posts yet
+</div>
+
+{% endfor %}
+
+</div>
+
+</div>
+
+</div>
+
+{% endblock %}
